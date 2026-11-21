@@ -1,4 +1,4 @@
-/* sieteseg.c -- Manejo de los 4 displays de 7 segmentos de la DISEN-EXP
+/* sieteseg.c -- Manejo de los 4 displays de 7 segmentos
 
   Hay un único decodificador compartido por los 4 displays, así que solo
   se puede encender uno cada vez. Se hace multiplexación temporal: una
