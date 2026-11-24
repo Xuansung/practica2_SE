@@ -11,7 +11,7 @@
 
 int main(void) {
   uint8_t digitos[4] = {1, 2, 3, 4};
-
+  serial_init();
   /* Inicializar los displays */
   sieteSeg_init();
 
@@ -32,5 +32,4 @@ int main(void) {
 
   while (1) {
   }
-  return 0;
 }
