@@ -12,10 +12,16 @@
 int main(void) {
   /* Inicializar los displays */
   sieteSeg_init();
-
   /* Esperar 3 segundos */
   timer_sleep_ms(3000);
-
+   
+  /* Mostrar el array 4321 */
+  uint8_t digitos[4] = {4, 3, 2, 1};
+  sieteSeg_digitos(digitos);
+   
+  /* Esperar 3 segundos */
+  timer_sleep_ms(3000);
+   
   /* Mostrar el número 5678 */
   sietesSeg_valor(5678);
 
@@ -26,5 +32,6 @@ int main(void) {
   sietesSeg_valor(25);
 
   while (1) {
+     
   }
 }
