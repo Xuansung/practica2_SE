@@ -10,13 +10,8 @@
 #include "timer.h"
 
 int main(void) {
-  uint8_t digitos[4] = {1, 2, 3, 4};
-
   /* Inicializar los displays */
   sieteSeg_init();
-
-  /* Mostrar el array 1234 */
-  sieteSeg_digitos(digitos);
 
   /* Esperar 3 segundos */
   timer_sleep_ms(3000);
@@ -32,5 +27,4 @@ int main(void) {
 
   while (1) {
   }
-  return 0;
 }
