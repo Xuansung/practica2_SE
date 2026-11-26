@@ -30,6 +30,7 @@
   - El puerto T completo como salida.
   - Un canal del temporizador para el refresco periódico.
 
+  
   @author Alba Hidalgo Martín, Xuan Sun, Juhi Kamal Chatani Mansukhani
   @date 19/11/2026
 
@@ -55,7 +56,11 @@ void sieteSeg_init(void);
  * Recibe un puntero a un array de al menos cuatro bytes. Cada posición
  * contiene el valor (0 - 9) que se enseñará en el display
  * correspondiente.
- *
+ * IMPORTANTE: el array que se pasa a sieteSeg_digitos() debe ir en
+ * orden INVERTIDO. La posición 0 se muestra en el display de la
+ * derecha (unidades) y la posición 3 en el de la izquierda (millares).
+ * Para que se vea 1234 hay que pasar {4, 3, 2, 1}.
+
  * @param array puntero al array con los cuatro dígitos.
  *
  * @note El array debe mantenerse válido mientras se esté mostrando.
