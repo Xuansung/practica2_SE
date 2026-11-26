@@ -26,21 +26,8 @@
 /* Número de displays disponibles */
 #define NUM_DISPLAYS 4
 
-/* Primer bit utilizado para elegir un display */
-#define ENCENDER_BIT 4
-
 /* Array para enseñar 1234 en el inicio */
-static uint8_t array_inicial[NUM_DISPLAYS] = {
-  1, 2, 3, 4
-}; 
-
-/* Array donde se guardan las cifras del número decimal */
-static uint8_t valor_mostrado[NUM_DISPLAYS] = {
-  0, 0, 0, 0
-}; 
-
-/* Puntero al array con los dígitos que se están mostrando */
-static uint8_t *array_pasado = array_inicial;
+static uint8_t array_pasado[NUM_DISPLAYS] = {4,3,2,1}; 
 
 /* Indica el display que se tiene que actualizar (0 a 3) */
 static uint8_t bit_display_actual = 0; 
@@ -55,7 +42,7 @@ static void refrescar(void) {
   
   /* Seleccionar el display que se va a encender */
   uint8_t interruptor = 1 << (
-    ENCENDER_BIT + bit_display_actual
+    NUM_DISPLAYS + bit_display_actual
   );
   
   /* Encender el display y enviar el número al decodificador */
@@ -65,9 +52,7 @@ static void refrescar(void) {
   bit_display_actual++;
 
   /* Cuando se llega al último, se vuelve al primero */
-  if (bit_display_actual >= NUM_DISPLAYS) {
-    bit_display_actual = 0;
-  }
+  bit_display_actual %= NUM_DISPLAYS;
 
 }
 
@@ -89,9 +74,14 @@ void sieteSeg_init(void){
 
 
 /* Selecciona el array de dígitos que se quiere mostrar */
-void sieteSeg_digitos(uint8_t *array){
-  if (array != NULL) {
-    array_pasado = array;
+void sieteSeg_digitos(uint8_t array[]){
+  /*uint8_t *puntero_array = array;
+  if (puntero_array != 0) {
+    *array_pasado = *puntero_array;
+  }*/
+
+  for (int i=0; i < NUM_DISPLAYS; i++) {
+    array_pasado[i] = array[i];
   }
 }
 
@@ -101,11 +91,11 @@ void sietesSeg_valor(uint16_t decimal){
    /* Separa las cifras empezando por las unidades.
       Si el valor es muy grande se queda con las últimas 4 cifras.
    */
-  for (int i= NUM_DISPLAYS - 1; i >= 0; i--) {
-    valor_mostrado[i] = decimal % 10;
+  for (int i=0; i < NUM_DISPLAYS; i++) {
+    array_pasado[i] = decimal % 10;
     decimal /= 10;
   }
 
   /* Selecciona el array con las cifras obtenidas */
-  array_pasado = valor_mostrado;
+
 }
