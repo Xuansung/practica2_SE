@@ -72,5 +72,4 @@ int main(void) {
     timer_sleep_ms(REFRESCO_MS);
   }
 
-  return 0;
 }
