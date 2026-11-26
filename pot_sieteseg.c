@@ -31,7 +31,7 @@
 
 int main(void) {
   uint16_t valor;
-  uint16_t valor_anterior = 0xFFFF;   /* fuerza a imprimir el primero */
+  uint16_t valor_anterior = 0;   
 
   serial_init();
   sieteSeg_init();                    /* hace timer_init() y muestra 1234 */
