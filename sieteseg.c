@@ -23,6 +23,10 @@
 #define PERIODO 2000 
 #define FACTOR 3
 
+
+/* Valor que significa que el display debe estar apagado */
+#define APAGADO 0xFF
+
 /* Número de displays disponibles */
 #define NUM_DISPLAYS 4
 
@@ -46,8 +50,11 @@ static void refrescar(void) {
   );
   
   /* Encender el display y enviar el número al decodificador */
-  gpio_setPort(PORT, interruptor | num);
-
+  if (valor == APAGADO) {
+    gpio_setPort(PORT, 0); /* No hay display encendido en ese turno*/
+  } else {
+    gpio_setPort(PORT, interruptor | num);
+  }
   /* Pasar al siguiente display */
   bit_display_actual++;
 
@@ -96,6 +103,9 @@ void sietesSeg_valor(uint16_t decimal){
     decimal /= 10;
   }
 
-  /* Selecciona el array con las cifras obtenidas */
-
+  /* Apaga los ceros a la izquierda empezando por la izq (pos. 3)
+  y para en la primera cifra distinta de 0 (salvo la unidad 0) */
+  for (i=NUM_DISPLAYS - 1; i > 0 && array_pasado[i] == 0; i--) {
+    array_pasado[i] == APAGADO;
+  }
 }
